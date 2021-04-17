@@ -1,0 +1,22 @@
+linters:
+  enable-all: true
+
+issues:
+  exclude-rules:
+    - path: _cache\.go
+      linters:
+        - dupl
+    - path: \.go
+      linters:
+        - godox
+        - stylecheck
+        - maligned
+    - path: _test\.go
+      linters:
+        - lll
+        - dupl
+        - funlen
+        - gomnd
+        - maligned
+
+  exclude-use-default: false

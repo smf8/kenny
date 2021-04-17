@@ -1,16 +1,19 @@
 package main
 
 import (
-	"github.com/smf8/kenny/internal/app/kenny/cmd"
 	"os"
+
+	"github.com/smf8/kenny/internal/app/kenny/cmd"
 )
 
+const exitCodeErr = 1
+
 func main() {
-	root := cmd.NewDevicesCommand()
+	root := cmd.NewRootCommand()
 
 	if root != nil {
 		if err := root.Execute(); err != nil {
-			os.Exit(1)
+			os.Exit(exitCodeErr)
 		}
 	}
 }

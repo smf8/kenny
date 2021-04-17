@@ -32,7 +32,7 @@ format: check-formatter
 check-linter:
 	which golangci-lint || GO111MODULE=off curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
 
-lint: check-linter
+lint: check-linter format
 	golangci-lint run $(ROOT)/...
 
 ############################################################
