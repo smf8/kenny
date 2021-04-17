@@ -11,4 +11,9 @@ var def = Config{
 		Level:   5,
 		Enabled: true,
 	},
+
+	Recorder: Recorder{
+		NumberOfChannels: 1,
+		SampleRate:       44100,
+	},
 }

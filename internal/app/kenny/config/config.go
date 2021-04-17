@@ -9,20 +9,27 @@ import (
 )
 
 type (
-	//Config represents a kenny config instance
+	//Config represents a kenny config instance.
 	Config struct {
-		Debug  bool   `koanf:"debug"`
-		Logger Logger `koanf:"logger"`
+		Debug    bool     `koanf:"debug"`
+		Logger   Logger   `koanf:"logger"`
+		Recorder Recorder `koanf:"recorder"`
 	}
 
-	//Logger represents logger(logrus) config information
+	//Logger represents logger(logrus) config information.
 	Logger struct {
 		Level   logrus.Level `koanf:"level"`
 		Enabled bool         `koanf:"enabled"`
 	}
+
+	// Recorder represents audio recorder settings.
+	Recorder struct {
+		NumberOfChannels int
+		SampleRate       float64
+	}
 )
 
-//New creates a new config instance with this order : default -> config.yml
+//New creates a new config instance with this order : default -> config.yml.
 func New() Config {
 	var instance Config
 
