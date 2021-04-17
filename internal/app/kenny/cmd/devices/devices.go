@@ -3,29 +3,21 @@ package devices
 import (
 	"fmt"
 
-	"github.com/gordonklaus/portaudio"
 	log "github.com/sirupsen/logrus"
 	"github.com/smf8/kenny/internal/pkg/audio"
 	"github.com/spf13/cobra"
 )
 
 func main(deviceArg string) error {
-	err := portaudio.Initialize()
-	if err != nil {
-		return fmt.Errorf("failed to initialize portaudio: %w", err)
+	if err := audio.InitPortAudio(); err != nil {
+		return err
 	}
 
-	defer func() {
-		if err := portaudio.Terminate(); err != nil {
-			log.Debugf("failed to terminate portaudio: %s", err.Error())
-		}
-	}()
-
-	log.Debugf(portaudio.VersionText())
+	defer audio.TerminatePortAudio()
 
 	switch deviceArg {
 	case "list":
-		devices, err := audio.AllDevices()
+		devices, err := audio.DevicesInfo()
 		if err != nil {
 			log.Errorf("failed to get audio device list: %s", err.Error())
 		}
@@ -39,14 +31,14 @@ func main(deviceArg string) error {
 			log.Errorf("failed to get default input audio device: %s", err.Error())
 		}
 
-		fmt.Println(device)
+		fmt.Println(audio.PrintDeviceInfo(device))
 	case "output":
 		device, err := audio.DefaultOutputDevice()
 		if err != nil {
 			log.Errorf("failed to get default output audio device: %s", err.Error())
 		}
 
-		fmt.Println(device)
+		fmt.Println(audio.PrintDeviceInfo(device))
 	}
 
 	return nil

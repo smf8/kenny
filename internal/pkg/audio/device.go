@@ -7,9 +7,9 @@ import (
 	"github.com/gordonklaus/portaudio"
 )
 
-// AllDevices returns the list of available audio devices.
+// DevicesInfo returns the list of available audio devices.
 // `portaudio.Initialize()` must be called before running this function
-func AllDevices() ([]string, error) {
+func DevicesInfo() ([]string, error) {
 	devices, err := portaudio.Devices()
 	if err != nil {
 		return nil, err
@@ -18,7 +18,7 @@ func AllDevices() ([]string, error) {
 	result := make([]string, 0)
 
 	for _, d := range devices {
-		result = append(result, parseDeviceInfo(d))
+		result = append(result, PrintDeviceInfo(d))
 	}
 
 	return result, nil
@@ -26,27 +26,28 @@ func AllDevices() ([]string, error) {
 
 // DefaultInputDevice returns the default recording device.
 // `portaudio.Initialize()` must be called before running this function
-func DefaultInputDevice() (string, error) {
+func DefaultInputDevice() (*portaudio.DeviceInfo, error) {
 	device, err := portaudio.DefaultInputDevice()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return parseDeviceInfo(device), nil
+	return device, nil
 }
 
 // DefaultOutputDevice returns the default recording device.
-// `portaudio.Initialize()` must be called before running this function
-func DefaultOutputDevice() (string, error) {
+// `portaudio.Initialize()` must be called before running this function.
+func DefaultOutputDevice() (*portaudio.DeviceInfo, error) {
 	device, err := portaudio.DefaultOutputDevice()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return parseDeviceInfo(device), nil
+	return device, nil
 }
 
-func parseDeviceInfo(info *portaudio.DeviceInfo) string {
+// PrintDeviceInfo formats and prints portaudio.DeviceInfo.
+func PrintDeviceInfo(info *portaudio.DeviceInfo) string {
 	sb := new(strings.Builder)
 
 	fmt.Fprintf(sb, "==========================================\n")
