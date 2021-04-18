@@ -26,6 +26,7 @@ type (
 	Recorder struct {
 		NumberOfChannels int
 		SampleRate       float64
+		FramesPerBuffer  int
 	}
 )
 

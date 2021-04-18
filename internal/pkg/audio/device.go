@@ -52,12 +52,12 @@ func PrintDeviceInfo(info *portaudio.DeviceInfo) string {
 
 	fmt.Fprintf(sb, "==========================================\n")
 	fmt.Fprintf(sb, "[Name]: %s\n", info.Name)
-	fmt.Fprintf(sb, "[Max Input Channels]: %d\n", info.MaxInputChannels)
-	fmt.Fprintf(sb, "[Max Output Channels]: %d\n", info.MaxOutputChannels)
-	fmt.Fprintf(sb, "[Default Low Input Latency]: %s\n", info.DefaultLowInputLatency)
-	fmt.Fprintf(sb, "[Default High Input Latency]: %s\n", info.DefaultHighInputLatency)
-	fmt.Fprintf(sb, "[Default Low Output Latency]: %s\n", info.DefaultLowOutputLatency)
-	fmt.Fprintf(sb, "[Default High Output Latency]: %s\n", info.DefaultHighOutputLatency)
+	fmt.Fprintf(sb, "[Max input Channels]: %d\n", info.MaxInputChannels)
+	fmt.Fprintf(sb, "[Max output Channels]: %d\n", info.MaxOutputChannels)
+	fmt.Fprintf(sb, "[Default Low input Latency]: %s\n", info.DefaultLowInputLatency)
+	fmt.Fprintf(sb, "[Default High input Latency]: %s\n", info.DefaultHighInputLatency)
+	fmt.Fprintf(sb, "[Default Low output Latency]: %s\n", info.DefaultLowOutputLatency)
+	fmt.Fprintf(sb, "[Default High output Latency]: %s\n", info.DefaultHighOutputLatency)
 	fmt.Fprintf(sb, "[Default Sample Rate]: %f\n", info.DefaultSampleRate)
 
 	if info.HostApi != nil {
