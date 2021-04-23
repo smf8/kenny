@@ -27,6 +27,7 @@ type (
 		NumberOfChannels int
 		SampleRate       float64
 		FramesPerBuffer  int
+		OpusFrameSizeMs  int
 	}
 )
 

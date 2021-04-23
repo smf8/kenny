@@ -3,8 +3,9 @@ package devices
 import (
 	"fmt"
 
+	"github.com/smf8/kenny/internal/app/kenny/audio"
+
 	log "github.com/sirupsen/logrus"
-	"github.com/smf8/kenny/internal/pkg/audio"
 	"github.com/spf13/cobra"
 )
 
