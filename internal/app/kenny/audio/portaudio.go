@@ -78,6 +78,36 @@ func (a *API) PlayAudioCallback(output []int32) {
 	}
 }
 
+// DefaultStreamParam returns default streamParameters which are being used by the host.
+func DefaultStreamParam(deviceType DeviceType) (*portaudio.StreamParameters, error) {
+	defaultHostAPI, err := portaudio.DefaultHostApi()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get default host audio api: %w", err)
+	}
+
+	var param portaudio.StreamParameters
+
+	switch deviceType {
+	case RecordDeviceType:
+		param = portaudio.LowLatencyParameters(
+			defaultHostAPI.DefaultInputDevice,
+			nil,
+		)
+	case PlayDeviceType:
+		param = portaudio.LowLatencyParameters(
+			nil,
+			defaultHostAPI.DefaultOutputDevice,
+		)
+	}
+
+	// for sake of simplicity, we only process mono audio
+	param.Input.Channels = 1
+	param.Input.Channels = 1
+	param.FramesPerBuffer = 64
+
+	return &param, nil
+}
+
 // NewStreamParam creates a new output/input stream which is ready to use.
 // For temporarily pausing record/play use Stop() and to finish using stream call Close().
 func NewStreamParam(s *StreamSettings, device *portaudio.DeviceInfo,
