@@ -17,10 +17,13 @@ func makeConfig() webrtc.Configuration {
 }
 
 // return a new peerConnection
-func makePeerConnection() *webrtc.PeerConnection{
+func makePeerConnection(onICEStateChaneCallback func(connectionState webrtc.ICEConnectionState)) *webrtc.PeerConnection {
 	peerConnection, err := webrtc.NewPeerConnection(makeConfig())
 	if err != nil {
 		panic(err)
 	}
+	
+	peerConnection.OnICEConnectionStateChange(onICEStateChaneCallback)
+
 	return peerConnection
 }
