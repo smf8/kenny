@@ -27,3 +27,10 @@ func makePeerConnection(onICEStateChaneCallback func(connectionState webrtc.ICEC
 
 	return peerConnection
 }
+
+func setSDPOffer(pc *webrtc.PeerConnection, offer webrtc.SessionDescription) {
+	err := pc.SetRemoteDescription(offer)
+	if err != nil {
+		panic(err)
+	}
+}
