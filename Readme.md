@@ -11,8 +11,8 @@ after that, find out about available commands with:
 ./kenny -h
 ```
 ## TODO
-- [ ] Integrate with PortAudio for audio recording and audio playback
-- [ ] Use OPUS for audio encoding/decoding
+- [x] Integrate with PortAudio for audio recording and audio playback (with the limitation of only 1 concurrent audio stream)
+- [x] Use OPUS for audio encoding/decoding
 - [ ] Add webRTC signaling client
 - [ ] Transmit audio with webRTC
 - [ ] Integrate with ion-sfu
