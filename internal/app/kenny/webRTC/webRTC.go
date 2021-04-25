@@ -34,3 +34,15 @@ func setSDPOffer(pc *webrtc.PeerConnection, offer webrtc.SessionDescription) {
 		panic(err)
 	}
 }
+
+func setSDPAnswer(pc *webrtc.PeerConnection) {
+	answer, err := pc.CreateAnswer(nil)
+	if err != nil {
+		panic(err)
+	}
+
+	err = pc.SetLocalDescription(answer)
+	if err != nil {
+		panic(err)
+	}
+}
