@@ -4,7 +4,7 @@ import (
 	"github.com/pion/webrtc/v3"
 )
 
-// make config for stun & turn servers (no turn server yet :))
+// Make config for stun & turn servers (no turn server yet :))
 func makeConfig() webrtc.Configuration {
 	config := webrtc.Configuration {
 		ICEServers: []webrtc.ICEServer {
@@ -16,7 +16,7 @@ func makeConfig() webrtc.Configuration {
 	return config
 }
 
-// return a new peerConnection
+// Return a new peer connection
 func makePeerConnection(onICEStateChaneCallback func(connectionState webrtc.ICEConnectionState)) *webrtc.PeerConnection {
 	peerConnection, err := webrtc.NewPeerConnection(makeConfig())
 	if err != nil {
@@ -28,6 +28,7 @@ func makePeerConnection(onICEStateChaneCallback func(connectionState webrtc.ICEC
 	return peerConnection
 }
 
+// Take a offer from another system and set it for this peer connection
 func setSDPOffer(pc *webrtc.PeerConnection, offer webrtc.SessionDescription) {
 	err := pc.SetRemoteDescription(offer)
 	if err != nil {
@@ -35,6 +36,7 @@ func setSDPOffer(pc *webrtc.PeerConnection, offer webrtc.SessionDescription) {
 	}
 }
 
+// After an offer received, we set an answer for that peer connection
 func setSDPAnswer(pc *webrtc.PeerConnection) {
 	answer, err := pc.CreateAnswer(nil)
 	if err != nil {
