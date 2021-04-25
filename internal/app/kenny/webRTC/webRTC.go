@@ -15,3 +15,12 @@ func makeConfig() webrtc.Configuration {
 	}
 	return config
 }
+
+// return a new peerConnection
+func makePeerConnection() *webrtc.PeerConnection{
+	peerConnection, err := webrtc.NewPeerConnection(makeConfig())
+	if err != nil {
+		panic(err)
+	}
+	return peerConnection
+}
