@@ -3,8 +3,6 @@ package portaudio
 import (
 	"fmt"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/gordonklaus/portaudio"
 )
 
@@ -91,7 +89,7 @@ func (p *PORecorder) Record(streamID int) ([]int16, error) {
 	recordStream := p.streams[streamID]
 
 	if err := recordStream.stream.Read(); err != nil {
-		logrus.Errorf("failed to read input stream %d: %w", streamID, err)
+		return nil, fmt.Errorf("failed to read input stream %d: %w", streamID, err)
 	}
 
 	return recordStream.buffer, nil
