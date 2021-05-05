@@ -10,9 +10,10 @@ type API struct {
 // call OpenStream for each media stream and close it
 // after you're done using it.
 type Player interface {
-	OpenStream() (int, chan<- [][]int16, error)
-	Play(streamID int) error
+	OpenStream() (int, error)
+	Play(streamID int, data []int16) error
 	PausePlay(streamID int) error
+	ResumePlay(streamID int) error
 	CloseStream(streamID int) error
 }
 
@@ -20,8 +21,9 @@ type Player interface {
 // call OpenStream for each media input (i.e. microphone and system sound)
 // and close it after you're done using it.
 type Recorder interface {
-	OpenStream() (int, <-chan [][]int16, error)
-	Record(streamID int) error
+	OpenStream() (int, error)
+	Record(streamID int) ([]int16, error)
 	PauseRecord(streamID int) error
+	ResumeRecord(streamID int) error
 	CloseStream(streamID int) error
 }
