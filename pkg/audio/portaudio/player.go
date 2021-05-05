@@ -3,8 +3,6 @@ package portaudio
 import (
 	"fmt"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/gordonklaus/portaudio"
 )
 
@@ -99,7 +97,7 @@ func (p *POPlayer) Play(streamID int, data []int16) error {
 		copy(playStream.buffer[playStream.bufferIndex:], data)
 
 		if err := playStream.stream.Write(); err != nil {
-			logrus.Errorf("failed to write to output stream %d: %s", streamID, err.Error())
+			return fmt.Errorf("failed to write to output stream %d: %w", streamID, err)
 		}
 
 		playStream.bufferIndex = copy(playStream.buffer, data[overflow:])
